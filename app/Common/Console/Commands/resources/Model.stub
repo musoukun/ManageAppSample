@@ -1,0 +1,56 @@
+<?php
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+{use}
+
+/**
+ * {TableComment}
+ *
+ * {Properties}
+ * @author waroshi@gmail.com
+ * @copyright  musoukun
+ * @category Entity
+ * @package App\Models\{ModelName}.php;
+ */
+class {ModelName} extends Model
+{
+    use HasFactory;
+
+    protected $table = {TableName};
+    {PrimaryKey}
+
+    /**
+     * when registering or renewing created_at,update_at unnecessary.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
+     * Indicates if the IDs are auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = false; // default:true
+
+    protected $fillable = [];
+    protected $guarded = [];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
+    ];
+
+    protected $appends = [];
+    protected $dates = [
+        {Dates}
+    ];
+    protected $casts = [
+        {Casts}
+    ];
+}

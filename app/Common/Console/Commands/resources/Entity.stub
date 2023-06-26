@@ -1,0 +1,63 @@
+<?php
+declare(strict_types=1);
+
+namespace App\Domain\{feature};
+
+use App\Common\Base\Entity;
+use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Model as Model;
+use App\Models\{tableName};
+
+/**
+ * Class {feature}Entity
+ * {Comment}
+ *
+ * @access public
+ * @author waroshi@gmail.com
+ * @copyright musoukun
+ * @category Entity
+ * @package App\Domain\{feature};
+ */
+class {feature}Entity extends Entity
+{
+    {varProperty}
+
+    /**
+     * @var array キャストルール
+     */
+    protected $casts = [
+        {cast}
+    ];
+
+    /**
+     * {feature}Entity __construct.
+     * コンストラクタ
+     {property}
+     */
+    public function __construct($obj)
+    {
+
+        if ($obj instanceof Request) {
+
+            $obj = $this->requestCast($obj);//型チェック及び変換
+
+            {setter}
+
+        }elseif($obj instanceof Model){
+
+            $this->model2Entity($obj);
+
+        }
+
+    }
+
+    /**
+     * {feature}Entity model2Entity.
+     * Modelへの変換
+     * @param Model $model
+     */
+    public function model2Entity(Model $model)
+    {
+        {toEntity}
+    }
+}

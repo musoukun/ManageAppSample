@@ -1,0 +1,51 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Domain\{feature};
+use App\Common\Base\BaseFormRequest;
+
+/**
+ * {feature}Request
+ * {Comment}
+ * @access public
+ * @author waroshi@gmail.com
+ * @copyright  musoukun
+ * @category Request
+ * @package App\Domain\{feature};
+ */
+final class {feature}Request extends BaseFormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     * @return bool
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    /**
+     * @return array
+     */
+    public function rules(): array
+    {
+        return [
+            {validation}
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            {validationAttribute}
+        ];
+    }
+
+    /**
+     * 項目の複合的なバリデーション処理を記載
+     */
+    public function withValidator(\Illuminate\Contracts\Validation\Validator $validator)
+    {
+    }
+}
