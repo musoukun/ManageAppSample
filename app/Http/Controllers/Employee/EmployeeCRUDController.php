@@ -76,14 +76,13 @@ class EmployeeCRUDController extends Controller
      */
     public function update(EmployeeRequest $request)
     {
-
         // 初期セット
         $this->init();
-
         // 登録処理
         $this->EmployeeService->update();
 
-        return redirect("manageapp/employee/edit/" . $this->inputData->staffCode)->withInput()
+        return redirect("manageapp/employee/edit/" . $this->inputData->staffCode)
+            ->withInput()
             ->with("message", '変更が完了しました');
     }
 
@@ -97,10 +96,8 @@ class EmployeeCRUDController extends Controller
     {
         // 初期セット
         $this->init();
-
         // 登録処理
         $this->EmployeeService->delete();
-
         return redirect("manageapp/employee/search")->withInput()
             ->with("message", 'データを削除しました');
     }

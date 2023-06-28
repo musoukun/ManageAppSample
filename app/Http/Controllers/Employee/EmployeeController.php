@@ -36,7 +36,6 @@ class EmployeeController extends Controller
         $this->EmployeeService = new EmployeeService($this->entity);
     }
 
-
     /**
      * 初期表示
      * @param  \Illuminate\Http\Request  $request
@@ -56,23 +55,26 @@ class EmployeeController extends Controller
      */
     public function forgetSessionInputValue()
     {
-        // 全てのリクエストデータを取得
+        // 全てのentityプロパティを取得（ここはPostされていない状態なのでRequestにほしい値がはいらないため、Entityで取得）
         $allInputs = $this->entity;
+        //name要素を削除
         foreach ($allInputs as $name => $value) {
             $this->request->session()->forget($name);
         }
+        // 検索モードを解除
         $this->request->session()->forget('search');
     }
 
 
     /**
-     * sessionに検索条件をset
+     * sessionに検索条件を設定
      * @todo 
      */
     public function setSessionInputValue()
     {
         // 全てのリクエストデータを取得
         $allInputs = $this->request->all();
+        // リクエスト内のname要素をSessionに設定
         foreach ($allInputs as $name => $value) {
             if (strpos($name, '_token') === false) {
                 $this->request->session()->put($name, $value);
@@ -88,6 +90,9 @@ class EmployeeController extends Controller
     public function search()
     {
         $title = "社員検索";
+
+        // 遷移前の画面で検索ボタンが押されているかどうかをチェックして
+        // 検索ボタンが押されていたら検索実行
         if ($this->request->session()->get('search') === 'search' or $this->request->search === 'search') {
             $searchDatas = $this->EmployeeService->search(2);
             $this->setSessionInputValue();
