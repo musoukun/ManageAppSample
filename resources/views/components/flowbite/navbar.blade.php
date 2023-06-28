@@ -19,7 +19,7 @@
                 </svg>
                 <span class="sr-only">Toggle sidebar</span>
             </button>
-            <a href="{{ route('manageapp') }}" class="mr-4 flex items-center justify-between">
+            <a href="{{ route('manageapp.employee.search.get') }}" class="mr-4 flex items-center justify-between">
                 <img src="{{ asset('images/ManageAppLogo.png') }}" class="mr-3 h-20 w-24 rounded-full"
                     alt="SampleApp Logo" />
                 <span

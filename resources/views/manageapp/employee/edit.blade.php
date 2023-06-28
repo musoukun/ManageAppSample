@@ -11,8 +11,10 @@
 
         <div class="rounded-lg border-2 border-dashed border-gray-200 dark:border-gray-700">
             <main class="mt-24 p-4 md:ml-64">
-                <div class="flex">
-                    <a href="{{ route('manageapp') }}">
+
+                <form action="{{ route('manageapp.employee.search.post') }}" method="POST" id="back" name="back">
+                    @csrf
+                    <button class=" flex text-lg font-bold" type="submit" name='back' value="back">
                         <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                             stroke-linejoin="round" class="mr-6 dark:text-gray-200">
@@ -20,12 +22,9 @@
                             <path d="M12 8l-4 4 4 4M16 12H9" />
 
                         </svg>
-                    </a>
-                    <div class="my-2 ml-2 items-center text-lg font-bold">
-                        <h1>{{ $title }}</h1>
-                    </div>
-                </div>
-
+                        <h1 class="mt-1">{{ $title }}</h1>
+                    </button>
+                </form>
 
                 @if ($errors->any())
 
@@ -63,8 +62,9 @@
                 <form class="grid grid-cols-7 gap-1" action="{{ route('manageapp.employee.update') }}" method="POST"
                     id="EmployeeUpdateform" name="EmployeeUpdateform">
                     @csrf
-                    <div class="col-span-4">
-                        
+
+                    <div class="col-span-4 row-start-2">
+
                         <x-flowbite.input id="staffCode" name="staffCode" :value="$selectData->staffCode" readonly>社員コード
                         </x-flowbite.input>
 
@@ -86,7 +86,8 @@
                         <x-flowbite.input id="travelCost" name="travelCost" :value="$selectData->travelCost">交通費_税抜
                         </x-flowbite.input>
 
-                        <x-flowbite.datepicker id="birthdate" name="birthdate" value="$selectData->barthdate">生年月日</x-flowbite.datepicker>
+                        <x-flowbite.datepicker id="birthdate" name="birthdate" value="$selectData->barthdate">生年月日
+                        </x-flowbite.datepicker>
 
                         <x-flowbite.input id="postcode" name="postcode" :value="$selectData->postcode">郵便番号</x-flowbite.input>
 

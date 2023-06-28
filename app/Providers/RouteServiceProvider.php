@@ -26,7 +26,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const MANAGEAPP_HOME = 'manageapp/employee/';
+    public const MANAGEAPP_HOME = 'manageapp/employee/search';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
@@ -44,7 +44,6 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
-
         });
     }
 

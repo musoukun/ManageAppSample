@@ -14,7 +14,7 @@ use App\Common\Base\BaseFormRequest;
  * @author waroshi@gmail.com
  * @copyright  musoukun
  * @category Request
- * @package App\UseCase\Employee;
+ * @package App\Domain\Employee;
  */
 final class EmployeeRequest extends BaseFormRequest
 {
@@ -44,7 +44,7 @@ final class EmployeeRequest extends BaseFormRequest
             "postcode" => ["digits:7"],
             "address" => ["max:200"],
             "tel" => ["max:21"],
-            "mail" => ["email","max:254"],
+            "mail" => ["email", "max:254"],
             "remark" => ["max:1000"],
         ];
     }
@@ -64,7 +64,7 @@ final class EmployeeRequest extends BaseFormRequest
             'address' =>  '住所',
             'mail' =>  'メールアドレス',
             'remark' =>  '備考',
-            
+
         ];
     }
 

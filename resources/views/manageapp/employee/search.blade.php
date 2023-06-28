@@ -17,23 +17,23 @@
             <main class="mt-24 p-4 md:ml-64">
                 
                 <div class="my-2 ml-2 items-center text-lg font-bold">  
-                    <h1>{{ $title }}</h1>
+                    <h1 class="mt-1">{{ $title }}</h1>
                 </div>
                 <a href="/manageapp/employee/create"
                     class="text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
                     新規登録</a>
                 {{-- 検索フォーム --}}
-                <form class="my-3 grid gap-6 grid-cols-7" action="{{ route('manageapp.employee.search') }}" method="POST"
+                <form class="my-3 grid gap-6 grid-cols-7" action="{{ route('manageapp.employee.search.post') }}" method="POST"
                     name="Employeeform">
                     @csrf
                     <div class="col-span-3">
                         <x-flowbite.code-select name="departmentCode" id="departmentCode" codeKey="departmentCode"
-                            :value="$request->departmentCode">部署選択</x-flowbite.codeSelect>
-                            <x-flowbite.input type="text" name="staffCode" id="staffCode" :value="$request->staffCode">社員コード
+                            :value="session('departmentCode')">部署選択</x-flowbite.codeSelect>
+                            <x-flowbite.input type="text" name="staffCode" id="staffCode" :value="session('staffCode')">社員コード
                             </x-flowbite.input>
-                            <x-flowbite.input type="text" name="staffName" id="staffName" :value="$request->staffName">社員名
+                            <x-flowbite.input type="text" name="staffName" id="staffName" :value="session('staffName')">社員名
                             </x-flowbite.input>
-                            <button type="submit"
+                            <button type="submit" name="search" value="search"
                                 class="mt-2 text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">検索</button>
                     </div>
                 </form>

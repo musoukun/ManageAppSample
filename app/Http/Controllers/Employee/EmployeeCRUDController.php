@@ -9,6 +9,7 @@ use App\Domain\Employee\EmployeeRequest;
 use Illuminate\Http\Response;
 use App\Domain\Employee\EmployeeEntity;
 use App\Domain\Employee\EmployeeRepository;
+use Illuminate\Support\Facades\Validator;
 
 /**
  * Employee画面Controller
@@ -26,7 +27,7 @@ class EmployeeCRUDController extends Controller
     /**
      * EmployeeController __construct.
      * 検索フォームのデータ取得
-     * @param \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      */
     public function __construct(Request $request)
     {
@@ -36,7 +37,7 @@ class EmployeeCRUDController extends Controller
     /**
      * EmployeeController __construct.
      * formrequestを通してからEntityを扱いたいため、コンストラクタの代わりとなるメソッドを作成
-     * @param \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      */
     public function init()
     {
@@ -56,8 +57,10 @@ class EmployeeCRUDController extends Controller
      */
     public function insert(EmployeeRequest $request)
     {
+
         // 初期セット
         $this->init();
+
         // 登録処理
         $newStaffCode = $this->EmployeeService->insert();
 
@@ -73,8 +76,6 @@ class EmployeeCRUDController extends Controller
      */
     public function update(EmployeeRequest $request)
     {
-        // // バリデーションを個別で実行する場合
-        // $formRequest = app()->make('App\Domain\Employee\EmployeeRequest');
 
         // 初期セット
         $this->init();

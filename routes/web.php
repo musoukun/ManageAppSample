@@ -1,6 +1,7 @@
 <?php
 
-
+use \Illuminate\View\Middleware\ShareErrorsFromSession as ShareErrorsFromSession;
+use \Illuminate\Session\Middleware\StartSession as StartSession;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -46,14 +47,14 @@ Route::namespace('manageapp')->prefix('manageapp')->middleware('guest:manageapp'
 });
 
 // manageapp
-Route::namespace('manageapp')->prefix('manageapp')->middleware('auth:manageapp')->group(function () {
 
-    //社員検索
-    Route::get('employee/', [EmployeeController::class, 'index'])->name('manageapp');
+Route::namespace('manageapp')->prefix('manageapp')->middleware('auth:manageapp')->group(function () {
+    // //社員検索
+    // Route::get('employee/', [EmployeeController::class, 'index'])->name('manageapp');
 
     // paginationのためのgetで検索データ表示
-    Route::get('employee/search', [EmployeeController::class, 'search'])->name('manageapp.employee.search');
-    Route::post('employee/search', [EmployeeController::class, 'search'])->name('manageapp.employee.search');
+    Route::get('employee/search', [EmployeeController::class, 'index'])->name('manageapp.employee.search.get');
+    Route::post('employee/search', [EmployeeController::class, 'search'])->name('manageapp.employee.search.post');
 
     // 社員情報照会
     Route::get('employee/search/{staffCode?}/', [EmployeeController::class, 'select'])->name('manageapp.employee.select');

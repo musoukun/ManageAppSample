@@ -36,17 +36,48 @@ class EmployeeController extends Controller
         $this->EmployeeService = new EmployeeService($this->entity);
     }
 
+
     /**
      * 初期表示
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
-     * @todo compactに入れる改修はすべき
+     * @todo 
      */
     public function index()
     {
+        $this->forgetSessionInputValue();
         $title = "社員検索";
-        return view("manageapp.employee.search",  compact('title'))
-            ->with('request', $this->request);
+        return view('manageapp.employee.search')->with(compact('title'));
+    }
+
+    /**
+     * sessionから検索条件を削除
+     * @todo 
+     */
+    public function forgetSessionInputValue()
+    {
+        // 全てのリクエストデータを取得
+        $allInputs = $this->entity;
+        foreach ($allInputs as $name => $value) {
+            $this->request->session()->forget($name);
+        }
+        $this->request->session()->forget('search');
+    }
+
+
+    /**
+     * sessionに検索条件をset
+     * @todo 
+     */
+    public function setSessionInputValue()
+    {
+        // 全てのリクエストデータを取得
+        $allInputs = $this->request->all();
+        foreach ($allInputs as $name => $value) {
+            if (strpos($name, '_token') === false) {
+                $this->request->session()->put($name, $value);
+            }
+        }
     }
 
     /**
@@ -56,11 +87,14 @@ class EmployeeController extends Controller
      */
     public function search()
     {
-        $searchDatas = $this->EmployeeService->search(2);
         $title = "社員検索";
-
-        return view('manageapp.employee.search', compact('searchDatas', 'title'))
-            ->with('request', $this->request);
+        if ($this->request->session()->get('search') === 'search' or $this->request->search === 'search') {
+            $searchDatas = $this->EmployeeService->search(2);
+            $this->setSessionInputValue();
+            return view('manageapp.employee.search', compact('searchDatas', 'title'));
+        } else {
+            return view('manageapp.employee.search', compact('title'));
+        }
     }
 
     /**
@@ -82,7 +116,6 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-
         $title = '社員情報登録';
         return view("manageapp.employee.create", compact('title'))
             ->with('request', $this->request);
